@@ -46,6 +46,25 @@ if __name__ == "__main__":
 
     step_fragmentation_method = solution.step_fragmentation_method(0.1, 0.95, 0.05)
 
+    start_point = Point(2, 3)
+    solution = Solution(start_point, 10 ** -6)
+
+    constant_learning_rate = solution.constant_learning_rate_method(0.1)
+    draw_graph(constant_learning_rate, "red", "constant_learning_rate")
+
+    step_fragmentation_method = solution.step_fragmentation_method(0.1, 0.95, 0.2)
+
+    draw_graph(step_fragmentation_method, "blue", "step_fragmentation_method")
+
+    golden_ratio_method = solution.golden_ratio_method()
+    draw_graph(golden_ratio_method, "green", "golden_ratio_method")
+
+    fibonacci_method = solution.fibonacci_method()
+    draw_graph(fibonacci_method, "purple", "fibonacci_method")
+
+    fletcher_reeves_method = solution.fletcher_reeves_method()
+    draw_graph(fletcher_reeves_method, "orange", "fletcher_reeves_method")
+
     ax.view_init(25, 25)
     plt.legend()
     plt.show()
