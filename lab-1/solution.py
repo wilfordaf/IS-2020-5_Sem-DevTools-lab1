@@ -3,6 +3,18 @@ from functools import lru_cache
 import matplotlib.pyplot as plt
 
 
+def drawGraph(func):
+    def wrapper(solution):
+        result = func(solution)
+
+        print("Minimum found, value is: ", result[0])
+        plt.plot([i for i in range(result[2])], result[1], label=f"{func.__name__}")
+
+        return result
+
+    return wrapper
+
+
 class Solution:
     def __init__(self, leftBorder: float, rightBorder: float, precision: float):
         self.__leftBorder = leftBorder
@@ -10,6 +22,7 @@ class Solution:
         self.__precison = precision
         self.__GOLDEN_RATIO = (3 - sqrt(5)) / 2
 
+    @drawGraph
     def bisectionMethod(self):
         indent = self.__precison / 2.01
         leftBorder = self.__leftBorder
@@ -31,6 +44,7 @@ class Solution:
 
         return (leftBorder + rightBorder) / 2, intervalLengths, len(intervalLengths)
 
+    @drawGraph
     def goldenRatioMethond(self):
         leftBorder = self.__leftBorder
         rightBorder = self.__rightBorder
@@ -59,6 +73,7 @@ class Solution:
 
         return (leftBorder + rightBorder) / 2, intervalLengths, len(intervalLengths)
 
+    @drawGraph
     def fibonacciMethod(self):
         leftBorder = self.__leftBorder
         rightBorder = self.__rightBorder
@@ -107,6 +122,7 @@ class Solution:
 
         return (rightBorder + leftBorder) / 2, intervalLengths, len(intervalLengths)
 
+    @drawGraph
     def parablesMethod(self):
         leftBorder = self.__leftBorder
         rightBorder = self.__rightBorder
@@ -147,6 +163,7 @@ class Solution:
 
         return (rightBorder + leftBorder) / 2, intervalLengths, len(intervalLengths)
 
+    @drawGraph
     def brentMethod(self):
         leftBorder = self.__leftBorder
         rightBorder = self.__rightBorder
