@@ -259,9 +259,9 @@ class Solution:
             counter += 1
 
         if func_of_left_point == func_of_right_point:
-            left_border = right_fib_point
+            left_border = left_fib_point
         else:
-            right_border = left_fib_point
+            right_border = right_fib_point
 
         return (right_border + left_border) / 2, iteration_amount + 2
 
