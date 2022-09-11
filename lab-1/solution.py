@@ -19,17 +19,17 @@ class Solution:
     def __init__(self, leftBorder: float, rightBorder: float, precision: float):
         self.__leftBorder = leftBorder
         self.__rightBorder = rightBorder
-        self.__precison = precision
+        self.__precision = precision
         self.__GOLDEN_RATIO = (3 - sqrt(5)) / 2
 
     @drawGraph
     def bisectionMethod(self):
-        indent = self.__precison / 2.01
+        indent = self.__precision / 2.01
         leftBorder = self.__leftBorder
         rightBorder = self.__rightBorder
         intervalLengths = []
 
-        while not intervalLengths or intervalLengths[-1] >= self.__precison:
+        while not intervalLengths or intervalLengths[-1] >= self.__precision:
             intervalLengths.append(rightBorder - leftBorder)
             middle = (leftBorder + rightBorder) / 2
 
@@ -57,7 +57,7 @@ class Solution:
         funcOfLeftPoint = self.__func__(leftRatioPoint)
         funcOfRightPoint = self.__func__(rightRatioPoint)
 
-        while not intervalLengths or intervalLengths[-1] >= self.__precison:
+        while not intervalLengths or intervalLengths[-1] >= self.__precision:
             intervalLengths.append(rightBorder - leftBorder)
             if funcOfLeftPoint < funcOfRightPoint:
                 rightBorder = rightRatioPoint
@@ -82,7 +82,7 @@ class Solution:
         intervalLengths = [intervalLength]
 
         iterationAmount = 0
-        while self.__fibonacci__(iterationAmount) <= intervalLength / self.__precison:
+        while self.__fibonacci__(iterationAmount) <= intervalLength / self.__precision:
             iterationAmount += 1
 
         leftFibPoint = leftBorder + self.__fibonacciRatio__(iterationAmount, iterationAmount + 2) * intervalLength
@@ -136,21 +136,21 @@ class Solution:
         middle = (leftBorder + rightBorder) / 2
         funcOfMid = self.__func__(middle)
 
-        while not intervalLengths or intervalLengths[-1] >= self.__precison:
+        while not intervalLengths or intervalLengths[-1] >= self.__precision:
             prevMin = parabolaMin
             intervalLengths.append(rightBorder - leftBorder)
 
             numerator = ((middle - leftBorder) ** 2 * (funcOfMid - funcOfRightBorder)
                          - (middle - rightBorder) ** 2 * (funcOfMid - funcOfLeftBorder))
 
-            denomenator = 2 * ((middle - leftBorder) * (funcOfMid - funcOfRightBorder)
+            denominator = 2 * ((middle - leftBorder) * (funcOfMid - funcOfRightBorder)
                                - (middle - rightBorder) * (funcOfMid - funcOfLeftBorder))
 
-            parabolaMin = middle - (numerator / denomenator)
+            parabolaMin = middle - (numerator / denominator)
 
             if prevMin:
                 delta = parabolaMin - prevMin
-                if fabs(delta) < self.__precison:
+                if fabs(delta) < self.__precision:
                     return parabolaMin, intervalLengths, len(intervalLengths)
 
             funcOfParabolaMin = self.__func__(parabolaMin)
@@ -174,7 +174,7 @@ class Solution:
 
         intervalLengths = []
 
-        while not intervalLengths or intervalLengths[-1] >= self.__precison:
+        while not intervalLengths or intervalLengths[-1] >= self.__precision:
             intervalLengths.append(rightBorder - leftBorder)
             prevMin = parabolaMin
 
@@ -182,10 +182,10 @@ class Solution:
                 numerator = ((secondMin - minimum) ** 2 * (funcOfSecondMin - funcOfThirdMin)
                              - (secondMin - thirdMin) ** 2 * (funcOfSecondMin - funcOfMin))
 
-                denomenator = 2 * ((secondMin - minimum) * (funcOfSecondMin - funcOfThirdMin)
+                denominator = 2 * ((secondMin - minimum) * (funcOfSecondMin - funcOfThirdMin)
                                    - (secondMin - thirdMin) * (funcOfSecondMin - funcOfMin))
 
-                parabolaMin = secondMin - (numerator / denomenator)
+                parabolaMin = secondMin - (numerator / denominator)
 
             else:
                 if minimum < (rightBorder - leftBorder) / 2:
@@ -194,7 +194,7 @@ class Solution:
                 else:
                     parabolaMin = minimum - self.__GOLDEN_RATIO * (minimum - leftBorder)
 
-            if fabs(parabolaMin - minimum) < self.__precison:
+            if fabs(parabolaMin - minimum) < self.__precision:
                 return parabolaMin, intervalLengths, len(intervalLengths)
 
             funcOfParabolaMin = self.__func__(parabolaMin)
